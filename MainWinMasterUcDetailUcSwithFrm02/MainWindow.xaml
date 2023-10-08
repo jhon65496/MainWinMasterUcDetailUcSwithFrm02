@@ -1,0 +1,47 @@
+﻿<Window x:Class="MainWinMasterUcDetailUcSwithFrm02.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MainWinMasterUcDetailUcSwithFrm02"
+        xmlns:vm="clr-namespace:MainWinMasterUcDetailUcSwithFrm02.ViewModels"
+        mc:Ignorable="d"        
+        Height="450" 
+        Width="800">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" MinWidth="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Группы-->
+        <GroupBox Grid.Column="0" Header="Меню">
+            <DockPanel>
+                <ListBox ItemsSource="{Binding }" 
+                         SelectedItem="{Binding SelectedItemMenuMainWindow}" 
+                         Name="MainMenu"
+                         SelectedIndex="1">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" 
+                        Value="Stretch"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="m:Group">
+                            <DockPanel>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </GroupBox>
+        <GroupBox Header="Панель" Grid.Column="1">
+            <ContentControl Content="{Binding ElementName=MainMenu, Path=SelectedItem.Control}" />
+        </GroupBox>
+
+        <GridSplitter Grid.Column="0" HorizontalAlignment="Right" Width="3"/>
+    </Grid>
+</Window>
